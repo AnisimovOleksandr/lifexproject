@@ -43,3 +43,41 @@ begin
 		  return status;
 end;
 $body$
+
+create or replace function login_customer(
+	customer_login_email customers.customer_login%type,
+    customer_password_v customers.customer_password%type
+) returns INT
+language plpgsql
+as
+$body$
+declare
+   found_id INT;
+begin
+
+	SELECT customers.customer_id
+		INTO found_id
+			FROM customers
+				WHERE (customers.customer_login LIKE customer_login_email AND customers.customer_password LIKE customer_password_v) OR
+					  (customers.customer_email LIKE customer_login_email AND customers.customer_password LIKE customer_password_v);
+
+	IF found_id IS NULL then
+	found_id := -1;
+	END IF;
+
+	return found_id;
+	exception
+	   when others then
+		  return -1;
+end;
+$body$
+
+create or replace function get_customer_info(
+   c_id int
+) RETURNS customers
+language sql
+as
+$body$
+  select * from customers
+  where customers.customer_id = c_id;
+$body$;
