@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/carousel.css') }}">
+    <title>Home page</title>
+  </head>
+<body>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img class="d-block w-100" src="{{ url_for('static', filename = 'img/lifex.jpg') }}" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100" src="{{ url_for('static', filename = 'img/lifex2.jpg') }}" alt="Second slide">
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+            </div>
+
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+                <h1 class="display-4 font-weight-normal text-center">Що покриває медичне страхування?</h1>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+                        <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 overflow-hidden" style="background-color: #85C1E9;">
+                          <div class="my-3 py-3">
+                            <h2 class="display-5 text-center">Швидку допомогу</h2><br><br>
+                              <ul class="list-unstyled">
+                                  <li><h5>Виклик швидкої допомоги в межах 50 км за межами міста</h5></li><br>
+                                  <li><h5>Виклик лікаря додому в межах 50 км за межами міста</h5></li><br>
+                                  <li><h5><strong>Покриття медикаментів</strong></h5></li>
+                              </ul>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="col">
+                  <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+                      <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-white overflow-hidden" style="background-color: #154360;">
+                        <div class="my-3 p-3">
+                            <h2 class="display-5 text-center">Екстрену допомогу</h2><br>
+                              <ul class="list-unstyled">
+                                  <li><h5>Екстрена госпіталізація</h5></li><br>
+                                  <li><h5>Лікування гострих захворювань в найкоротші терміни</h5></li><br>
+                                  <li><h5>Екстрена стоматологічна допомога</h5></li>
+                                  <li><h5><strong>Покриття медикаментів</strong></h5></li>
+                              </ul>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+                  <div class="col">
+                      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+                        <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 overflow-hidden" style="background-color: #85C1E9;">
+                          <div class="my-3 py-3">
+                            <h2 class="display-5 text-center">Амбулаторну допомогу</h2><br><br>
+                              <ul class="list-unstyled">
+                                  <li><h5>Відвідування лікарів</h5></li><br>
+                                  <li><h5>Отримання консультацій</h5></li><br>
+                                  <li><h5>Лікування в денному стаціонарі</h5></li><br>
+                                  <li><h5><strong>Покриття медикаментів</strong></h5></li>
+                              </ul>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+                <h1 class="display-4 font-weight-normal text-center">Чому люди обирають <strong>LIFE<em>X</em></strong>?</h1>
+            </div>
+
+            <div class="container-fluid text-center bg-white">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <i class="fa fa-hospital-o fa-2x text-secondary"></i>
+                      <h4>Власні медичні центри</h4>
+                    </div>
+                    <div class="col-sm-4">
+                      <i class="fa fa-clock-o fa-2x text-secondary" aria-hidden="true"></i>
+                      <h4>Цілодобове обслуговування</h4>
+                    </div>
+                    <div class="col-sm-4">
+                      <i class="fa fa-question-circle fa-2x text-secondary"></i>
+                      <h4>Швидка служба підтримки</h4>
+                    </div>
+                    </div>
+                    <br><br>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <i class="fa fa-user-md fa-2x text-secondary"></i>
+                      <h4>Робота з медичними установами напряму</h4>
+                    </div>
+                    <div class="col-sm-4">
+                      <i class="fa fa-medkit fa-2x text-secondary" aria-hidden="true"></i>
+                      <h4>Тільки якісні послуги та медікаменти</h4>
+                    </div>
+                    <div class="col-sm-4">
+                      <i class="fa fa-money fa-2x text-secondary" aria-hidden="true"></i>
+                      <h4>Вигідні тарифні плани</h4>
+                    </div>
+                  </div>
+            </div><br><br>
+
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+                <h1 class="display-4 font-weight-normal text-center">Ще трохи про <strong>LIFE<em>X</em></strong> у цифрах</h1>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+                        <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-white overflow-hidden" style="background-color: #154360;">
+                          <div class="my-3 py-3">
+                            <h2 class="display-5 text-center">1000+</h2><br><br>
+                              <ul class="list-unstyled">
+                                  <li><h5>Звернень клієнтів ми обробляємо в день</h5></li><br>
+                              </ul>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="col">
+                  <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+                        <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 overflow-hidden" style="background-color: #85C1E9;">
+                          <div class="my-3 p-3">
+                            <h2 class="display-5 text-center">65%</h2><br><br>
+                              <ul class="list-unstyled">
+                                  <li><h5>Середній рівень виплат (вище, ніж у конкурентів аж на 25%)</h5></li><br>
+                              </ul>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+                  <div class="col">
+                      <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+                        <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-white overflow-hidden" style="background-color: #154360;">
+                          <div class="my-3 py-3">
+                            <h2 class="display-5 text-center">10 млн. грн.</h2><br><br>
+                              <ul class="list-unstyled">
+                                  <li><h5>Виплачено за грудень 2022р. по медичному страхуванню</h5></li><br>
+                              </ul>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  </body>
+</html>
