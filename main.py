@@ -74,6 +74,7 @@ def register():
                 return render_template('homepage.html')
         else:
             connection.close()
+            flash('passwords are not match')
             return render_template('users/registration.html')
     else:
         redirect(url_for('homepage'))
