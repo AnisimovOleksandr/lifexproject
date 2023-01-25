@@ -1,16 +1,15 @@
-import os
-from config import *
+from config import Config
 from flask import Flask, redirect, url_for, render_template, request, flash
 import psycopg2
 import hashlib
 import datetime
-from db_connection import registration
 
 def to_sha(hash_string):
     sha_signature = hashlib.sha256(hash_string.encode()).hexdigest()
     return sha_signature
 
 server = Flask(__name__)
+server.config.from_object(Config)
 
 @server.route('/')
 def home():
@@ -37,7 +36,9 @@ def register():
     if request.method == 'GET':
         return render_template('users/registration.html')
     if request.method == 'POST':
-        connection = psycopg2.connect(SQLALCHEMY_DATABASE_URI)
+        connection = psycopg2.connect(
+            server.config['SQLALCHEMY_DATABASE_URI']
+        )
         connection.autocommit = True
 
         name = request.form['name']

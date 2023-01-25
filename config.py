@@ -1,1 +1,6 @@
-SQLALCHEMY_DATABASE_URI = "postgres://jojstdoumrmihh:dd9f493ca062fe3c8186be2a9fa3dedcac2dc316ca56d553788cb590037fa73c@ec2-54-76-43-89.eu-west-1.compute.amazonaws.com:5432/d1df7rbei8rbt2"
+import os
+
+class Config(object):
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SECRET_KEY = os.urandom(24)
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
