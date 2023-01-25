@@ -12,5 +12,9 @@ def home():
 def homepage():
     return render_template('homepage.html')
 
+@server.route('/contacts', methods=['GET', 'POST'])
+def contacts():
+    return render_template('contacts.html')
+
 if __name__ == '__main__':
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
