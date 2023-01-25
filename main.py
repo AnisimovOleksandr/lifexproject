@@ -63,11 +63,16 @@ def register():
 
         card = request.form['card']
         if password1 == password2:
+            cursor = connection.cursor()
+            cursor.callproc('register_customer', (login, password1, name, age, email, card))
+            status = cursor.fetchone()[0]
             connection.close()
-            return render_template('homepage.html')
+            if 'error' in status.lower():
+                return render_template('users/registration.html')
+            else:
+                return render_template('homepage.html')
         else:
             connection.close()
-            flash('Введені паролі не співпадають')
             return render_template('users/registration.html')
     else:
         redirect(url_for('homepage'))
