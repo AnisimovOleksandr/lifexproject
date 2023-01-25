@@ -16,5 +16,9 @@ def homepage():
 def contacts():
     return render_template('contacts.html')
 
+@server.route('/cases',methods=['GET'])
+def cases():
+    return render_template('insurance/insurance_cases.html')
+
 if __name__ == '__main__':
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
