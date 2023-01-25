@@ -5,7 +5,7 @@
     <a class="py-2 d-none d-md-inline-block text-light" href="{{url_for('contacts')}}">Контакти</a>
     {% if  g.nickname is not none%}
       <a class="py-2 d-none d-md-inline-block text-light"><i class="fa fa-user fa-lg" aria-hidden="true"></i> Особистий кабінет ({{g.nickname}})</a>
-      <a class="py-2 d-none d-md-inline-block text-light">Вийти</a>
+      <a class="py-2 d-none d-md-inline-block text-light" href="{{url_for('logout')}}">Вийти</a>
     {% else %}
       <a class="py-2 d-none d-md-inline-block text-light" href="{{url_for('login')}}">Вхід</a>
       <a class="py-2 d-none d-md-inline-block text-light" href="{{url_for('register')}}">Реєстрація</a>

@@ -126,5 +126,14 @@ def login():
             flash('There is no user with that login')
             return render_template('users/sign_in.html')
 
+@server.route('/users/logout')
+def logout():
+    session.pop('user_id', None)
+    session.pop('nickname', None)
+    g.user_id = None
+    g.nickname = None
+
+    return render_template('homepage.html')
+
 if __name__ == '__main__':
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
