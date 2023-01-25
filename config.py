@@ -1,1 +1,1 @@
-SQLALCHEMY_DATABASE_URI = "postgres://nvrkjknatvddfg:b2391e11ae99a31de6b0a8b8a9daec1e08b9aa09d1b295aa1a77c611a1635c49@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/d2ogdocghgubhj"
+SQLALCHEMY_DATABASE_URI = "postgres://jojstdoumrmihh:dd9f493ca062fe3c8186be2a9fa3dedcac2dc316ca56d553788cb590037fa73c@ec2-54-76-43-89.eu-west-1.compute.amazonaws.com:5432/d1df7rbei8rbt2"
