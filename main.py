@@ -63,13 +63,8 @@ def register():
 
         card = request.form['card']
         if password1 == password2:
-            status = registration(login, password1, name, age, email, card, connection)
             connection.close()
-            if 'error' in status.lower():
-                flash('Помилка при реєстрації')
-                return render_template('users/registration.html')
-            else:
-                return render_template('homepage.html')
+            return render_template('homepage.html')
         else:
             connection.close()
             flash('Введені паролі не співпадають')
