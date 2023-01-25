@@ -1,6 +1,14 @@
 import os
 from config import *
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request, flash
+import psycopg2
+import hashlib
+import datetime
+from db_connection import registration
+
+def to_sha(hash_string):
+    sha_signature = hashlib.sha256(hash_string.encode()).hexdigest()
+    return sha_signature
 
 server = Flask(__name__)
 
@@ -26,7 +34,48 @@ def login():
 
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
-    return render_template('users/registration.html')
+    if request.method == 'GET':
+        return render_template('users/registration.html')
+    if request.method == 'POST':
+        connection = psycopg2.connect(SQLALCHEMY_DATABASE_URI)
+        connection.autocommit = True
+
+        name = request.form['name']
+        login = request.form['login']
+        password1 = to_sha(request.form['pass1'])
+        password2 = to_sha(request.form['pass2'])
+        email = request.form['email']
+
+        birth = request.form['date']
+        print(birth)
+        year = int(birth[:4])
+        month = int(birth[5:7])
+        day = int(birth[8:])
+
+        now = datetime.datetime.now()
+        n_year = now.year
+        n_month = now.month
+        n_day = now.day
+
+        age = n_year - year
+        if n_month < month or (n_month == month and n_day < day):
+            age -= 1
+
+        card = request.form['card']
+        if password1 == password2:
+            status = registration(login, password1, name, age, email, card, connection)
+            connection.close()
+            if 'error' in status.lower():
+                flash('Помилка при реєстрації')
+                return render_template('users/registration.html')
+            else:
+                return render_template('homepage.html')
+        else:
+            connection.close()
+            flash('Введені паролі не співпадають')
+            return render_template('users/registration.html')
+    else:
+        redirect(url_for('homepage'))
 
 if __name__ == '__main__':
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

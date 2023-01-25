@@ -1,1 +1,1 @@
-APP_URL = "https://lifexproject.herokuapp.com/"
+SQLALCHEMY_DATABASE_URI = "postgres://nvrkjknatvddfg:b2391e11ae99a31de6b0a8b8a9daec1e08b9aa09d1b295aa1a77c611a1635c49@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/d2ogdocghgubhj"
