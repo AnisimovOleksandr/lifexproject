@@ -24,5 +24,9 @@ def cases():
 def login():
     return render_template('users/sign_in.html')
 
+@server.route('/users/register', methods=['GET', 'POST'])
+def register():
+    return render_template('users/registration.html')
+
 if __name__ == '__main__':
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
