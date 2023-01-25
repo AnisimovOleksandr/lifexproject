@@ -1,30 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-    </script>
-    <script src="{{ url_for('static', filename = 'js/jquery.payform.min.js') }}" charset="utf-8"></script>
-    <script src="{{ url_for('static', filename = 'js/form_validation.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/view_password.js') }}"></script>
-    <title>Увійти</title>
-      <style type="text/css">
-          footer{position:absolute; bottom:0; width:100%;}
-      </style>
-  </head>
-  <body>
-
-  {%include 'nav.html' %}
+{%extends 'jinja_forms.html'%}
+{% block content %}
 
         <div class="container">
             <div class="card bg-light">
@@ -56,14 +31,11 @@
                 <div class="form-group " id="submit_button">
                     <button type="submit" class="btn btn-primary btn-block"> Увійти  </button>
                 </div>
-                <p style="margin-bottom: 3px" class="text-center">Не маєте акаунта? <a>
-                    Реєстрація</a> </p>
+                <p style="margin-bottom: 3px" class="text-center">Не маєте акаунта? <a href="{{url_for('register')}}">
+                    Реєстрація</a></p>
                 </form>
             </article>
             </div>
         </div>
 
-    {%include 'footer.html'%}
-
-  </body>
-</html>
+{% endblock %}

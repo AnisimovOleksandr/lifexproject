@@ -1,0 +1,117 @@
+{%extends 'jinja_forms.html'%}
+{% block content %}
+        <div class="container">
+            <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 600px;">
+                <h4 class="card-title mt-3 text-center">Створити акаунт</h4>
+                <form action="{{url_for('register')}}" method="post" class="needs-validation" novalidate>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                     </div>
+                    <input name="name" class="form-control" pattern="[a-zA-Z][a-zA-Z- ]+[a-zA-Z]"
+                           placeholder="Ім'я" type="text"  required>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть ваше повне ім'я!
+                    </div>
+                </div>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                     </div>
+                    <input name="login" class="form-control" pattern="[a-zA-Z0-9 ]+" placeholder="Логін" type="text"
+                           required>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть правильний логін (від 6 символів)!
+                    </div>
+                </div>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+                     </div>
+                    <input name ='date' class="form-control" type="date" value="2000-01-01" id ='birth'
+                           min="1875-01-01" max="2020-01-01" required>
+                </div>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                     </div>
+                    <input name="email" class="form-control" placeholder="Email" type="email" required>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть існуючий адрес електронної пошти!
+                    </div>
+                </div>
+                <small class="form-text text-muted">Ми не передаємо персональні дані третім особам.</small>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-credit-card"></i> </span>
+                    </div>
+                    <input name="card" type="text" class="form-control"  placeholder="Номер банківської карти"
+                           id="cardNumber" required>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть правильний номер банківської карти!
+                    </div>
+                </div>
+                <small class="form-text text-muted">Ми не передаємо персональні дані третім особам.</small>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input name="pass1" id="myInput" class="form-control" placeholder="Введіть пароль" type="password"
+                           required>
+                    <button type="button">
+                        <i onclick="myFunction(this)" class="fa fa-eye"></i>
+                    </button>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть правильний пароль!
+                    </div>
+                </div>
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                    Ваш пароль повинен містити 6-20 символів, складатися с букв та цифр, та не містити пробіли
+                    чи спеціальні символи.
+                </small>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input name="pass2" class="form-control" placeholder="Підтвердьте пароль" type="password" required>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть правильний пароль!
+                    </div>
+                </div>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
+                          <label class="form-check-label" for="defaultCheck1">
+                            Я дозволяю обробку моїх персональних даних.
+                          </label>
+                    </div>
+                </div>
+                <div class="form-group " id="submit_button">
+                    <button type="submit" class="btn btn-primary btn-block"> Створити акаунт </button>
+                </div>
+                <p style="margin-bottom: 3px" class="text-center">Уже маєте акаунт? <a href="{{url_for('login')}}">Увійти</a></p>
+                </form>
+            </article>
+            </div>
+        </div>
+    <script>
+        document.title = "Реєстрація";
+        n = new Date();
+        y = n. getFullYear();
+        m = n. getMonth() + 1;
+        d = n. getDate();
+
+        if(d<10){
+            d='0'+d
+        }
+
+        if(m<10){
+            m='0'+m
+        }
+
+        max_birth_date = today = y-18+'-'+m+'-'+d;
+            document.getElementById("birth").setAttribute("max", max_birth_date);
+            document.getElementById('birth').setAttribute("value", max_birth_date);
+    </script>
+{% endblock %}
