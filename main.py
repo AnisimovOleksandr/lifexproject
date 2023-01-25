@@ -1,3 +1,4 @@
+import os
 from config import Config
 from flask import Flask, redirect, url_for, render_template, request, flash
 import psycopg2
@@ -10,7 +11,6 @@ def to_sha(hash_string):
 
 server = Flask(__name__)
 server.config.from_object(Config)
-
 @server.route('/')
 def home():
     return redirect(url_for('homepage'))
