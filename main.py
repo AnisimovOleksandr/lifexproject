@@ -52,12 +52,15 @@ def cases():
 
 @server.route('/insurance/<price>', methods=['GET', 'POST'])
 def insurance_form(price):
-    return render_template('insurance/insurance_form.html',
-                           price=price,
-                           fullname=session['fullname'],
-                           email=session['email'],
-                           bankcard=session['bankcard'])
-
+    if g.user_id == None:
+        return redirect(url_for('login'))
+    else:
+        return render_template('insurance/insurance_form.html',
+                               price=price,
+                               fullname=g.fullname,
+                               email=g.email,
+                               bankcard=g.bankcard)
+    
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
