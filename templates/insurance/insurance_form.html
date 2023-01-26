@@ -4,7 +4,7 @@
         <div class="card bg-light">
             <article class="card-body mx-auto" style="max-width: 800px;">
                 <h3 class="card-title mt-3 text-center">Страхування життя</h3>
-                <form action="{{url_for('form_health', price = 'beginner')}}" method="post" class="needs-validation" novalidate>
+                <form action="{{url_for('insurance_form', price = 'light')}}" method="post" class="needs-validation" novalidate>
 
                     <div class="form-group input-group input-group-lg">
                         <div class="input-group-prepend">
@@ -95,24 +95,8 @@
             </article>
         </div>
     </div>
-    <script>
-        const checkbox = document.getElementById('example-child-box');
-        const childForm = document.getElementsByClassName('child')[0];
-        checkbox.addEventListener('click', () =>{
-            if (checkbox.checked) {
-                childForm.classList.remove('hidden');
-                return;
-            }
-            childForm.classList.add('hidden');
-        });
-    </script>
-    <script src="{{ url_for('static', filename = 'js/child.js') }}"></script>
+
     <script src="{{ url_for('static', filename = 'js/jquery.maskedinput.min.js') }}"></script>
-    <script>
-    $(function(){
-      $("#phone").mask("+38(999) 999-99-99");
-    });
-    </script>
     <script>
         document.title = "Страхування життя";
         n = new Date();

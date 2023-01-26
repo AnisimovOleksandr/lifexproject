@@ -35,11 +35,11 @@ def homepage():
 def contacts():
     return render_template('contacts.html')
 
-@server.route('/cases',methods=['GET'])
+@server.route('/insurance',methods=['GET'])
 def cases():
     return render_template('insurance/insurance_cases.html')
 
-@server.route('/cases/<price>', methods=['GET', 'POST'])
+@server.route('/insurance/<price>', methods=['GET', 'POST'])
 def insurance_form(price):
     return render_template('insurance/insurance_form.html', price=price)
 
