@@ -166,14 +166,26 @@ def update():
                         (u_id, log_u, f_name, age_u, email_u, bankcard))
         status = cursor.fetchone()[0]
 
-        insurance = 'Договір не укладено'
+        cursor = connection.cursor()
+        cursor.execute(f"select * from contracts where contracts.fk_customer_id = {u_id}")
+        contracts = cursor.fetchall()
+
+        connection.close()
+
+        g.insurance = []
+
+        if contracts != []:
+            for real_tup in contracts:
+                g.insurance.append('Тариф ' + str(real_tup[2]) + ' дійсний до ' + str(real_tup[5]))
+        else:
+            g.insurance = 'Договір не укладено'
         connection.close()
         return render_template('users/profile_page.html',
                                full_name=f_name,
                                age=age_u,
                                email=email_u,
                                bankcard=bankcard,
-                               insurance=insurance)
+                               insurance=g.insurance)
 
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
