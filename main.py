@@ -55,11 +55,44 @@ def insurance_form(price):
     if g.user_id == None:
         return redirect(url_for('login'))
     else:
-        return render_template('insurance/insurance_form.html',
-                               price=price,
-                               fullname=g.fullname,
-                               email=g.email,
-                               bankcard=g.bankcard)
+        if request.method == 'GET':
+            return render_template('insurance/insurance_form.html',
+                                   price=price,
+                                   fullname=g.fullname,
+                                   email=g.email,
+                                   bankcard=g.bankcard)
+        else:
+
+            connection = psycopg2.connect(
+                server.config['SQLALCHEMY_DATABASE_URI']
+            )
+            connection.autocommit = True
+
+            session['price'] = request.form['tariff']
+
+            if session['price'] == 'light':
+                real_price = 100000
+            elif session['price'] == 'optimum':
+                real_price = 150000
+            elif session['price'] == 'premium':
+                real_price = 200000
+            else:
+                raise Exception
+
+            session['real_price'] = real_price
+
+            start_date = request.form['start_date']
+            end_date = request.form['end_date']
+
+            cursor = connection.cursor()
+            cursor.callproc('create_contract', (g.user_id, session["price"], str(real_price), end_date))
+
+            status = cursor.fetchone()[0]
+            session['contract_id'] = status
+            connection.close()
+
+            return render_template('payment.html')
+
 
 @server.route('/users/me',methods=['GET'])
 def my_cabinet():

@@ -32,7 +32,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> Дата початку дії договору</span>
                          </div>
-                        <input name ='end_date' class="form-control" type="date" value="2023-01-20" id="example-start-date-input" readonly>
+                        <input name ='start_date' class="form-control" type="date" value="2023-01-20" id="example-start-date-input" readonly>
                     </div>
 
                      <div class="form-group input-group input-group-lg">
@@ -50,7 +50,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> ПІБ </span>
                          </div>
-                        <input name="name" class="form-control" type="text" value="{{fullname}}" readonly >
+                        <input name="fullname" class="form-control" type="text" value="{{fullname}}" readonly >
                     </div>
                     <div class="form-group input-group input-group-lg">
                         <div class="input-group-prepend">
@@ -102,13 +102,9 @@
             m='0'+m;
         }
         today = y+'-'+m+'-'+d;
-        min_birth_date  = y-18+'-'+m+'-'+d;
         next_year_date = next_year+'-'+m+'-'+d;
 
         document. getElementById("example-start-date-input").setAttribute("value", today);
         document. getElementById("example-end-date-input").setAttribute("value", next_year_date);
-
-        document. getElementById("example-e-input").setAttribute("max", min_birth_date);
-        document. getElementById("example-e-input").setAttribute("value", min_birth_date);
 </script>
 {% endblock %}
