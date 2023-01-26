@@ -131,7 +131,48 @@ def my_cabinet():
 
 @server.route('/users/me/update', methods=['GET', 'POST'])
 def update():
-    return render_template('users/edit_profile_page.html')
+    connection = psycopg2.connect(
+        server.config['SQLALCHEMY_DATABASE_URI']
+    )
+    connection.autocommit = True
+
+    if request.method == 'GET':
+        return render_template('users/edit_profile_page.html')
+    else:
+        u_id = session['user_id']
+        log_u = session['nickname']
+        email_u = request.form['email']
+        f_name = request.form['name']
+        bankcard = request.form['card']
+        birth = request.form['date']
+
+        year = int(birth[:4])
+        month = int(birth[5:7])
+        day = int(birth[8:])
+
+        now = datetime.datetime.now()
+        n_year = now.year
+        n_month = now.month
+        n_day = now.day
+
+        age_u = int(n_year - year)
+
+        if n_month < month or (n_month == month and n_day < day):
+            age_u -= 1
+
+        cursor = connection.cursor()
+        cursor.callproc('update_customer',
+                        (u_id, log_u, f_name, age_u, email_u, bankcard))
+        status = cursor.fetchone()[0]
+
+        insurance = 'Договір не укладено'
+        connection.close()
+        return render_template('users/profile_page.html',
+                               full_name=f_name,
+                               age=age_u,
+                               email=email_u,
+                               bankcard=bankcard,
+                               insurance=insurance)
 
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
