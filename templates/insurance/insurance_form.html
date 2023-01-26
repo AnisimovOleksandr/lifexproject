@@ -1,0 +1,139 @@
+{%extends 'jinja_forms.html'%}
+{% block content %}
+    <div class="container">
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 800px;">
+                <h3 class="card-title mt-3 text-center">Страхування життя</h3>
+                <form action="{{url_for('form_health', price = 'beginner')}}" method="post" class="needs-validation" novalidate>
+
+                    <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Обраний тариф</span>
+                        </div>
+                        <input name ='tariff' class="form-control" type="text" value="{{price}}" id="tariff" readonly>
+                    </div>
+                    <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Ціна</span>
+                         </div>
+
+                        {%if price == 'light'%}
+                        <input name ='tar_price' class="form-control" type="text" value="100 000 грн" id="price_tar_b" readonly>
+                        {%elif price == 'optimum'%}
+                        <input name ='tar_price' class="form-control" type="text" value="150 000 грн" id="price_tar_m" readonly>
+                        {%elif price == 'premium'%}
+                        <input name ='tar_price' class="form-control" type="text" value="200 000 грн" id="price_tar_p" readonly>
+                        {% endif %}
+                    </div>
+
+                    <h5 style="text-align:center; margin-bottom: 20px; margin-top: 20px;">Умови дії договору</h5>
+
+                     <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Дата початку дії договору</span>
+                         </div>
+                        <input name ='end_date' class="form-control" type="date" value="2023-01-20" id="example-start-date-input" readonly>
+                    </div>
+
+                     <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Дата кінця дії договору</span>
+                         </div>
+                        <input name ='end_date' class="form-control" type="date" value="2023-01-20" id="example-end-date-input" readonly>
+                    </div>
+
+
+                    <h5 style="text-align:center; margin-bottom: 20px; margin-top: 20px;">
+                        Ідентифікаційні дані клієнта
+                    </h5>
+                    <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> ПІБ </span>
+                         </div>
+                        <input name="name" class="form-control" type="text" readonly >
+                    </div>
+                    <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Email</span>
+                         </div>
+                        <input name="email" class="form-control" type="email" readonly>
+                    </div>
+                    <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Номер банківської картки </span>
+                         </div>
+                        <input name="card_number" class="form-control" type="text" readonly>
+                    </div>
+                    <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Дата народження </span>
+                         </div>
+                        <input name ='birthday' class="form-control" type="date" value="2000-01-01" id="example-e-input" required>
+                    </div>
+
+
+                    <h5 style="text-align:center; margin-bottom: 20px; margin-top: 20px;">
+                        Прийняття індивідуальної пропозиції
+                    </h5>
+                    <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend form-check">
+                              <input name="check" class="form-check-input" type="checkbox" value="" id="defaultCheck2"
+                                     required>
+                              <label class="form-check-label" for="defaultCheck2">
+                                Підтверджую, що з умовами індивідуальної пропозиції згоден. З Правилами
+                                ознайомлений(-а). Надаю дозвіл на обробку моїх персональних даних.
+                              </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group " id="submit_button">
+                        <button type="submit" class="btn btn-primary btn-block"> Підтвердити відправку </button>
+                    </div>
+                </form>
+            </article>
+        </div>
+    </div>
+    <script>
+        const checkbox = document.getElementById('example-child-box');
+        const childForm = document.getElementsByClassName('child')[0];
+        checkbox.addEventListener('click', () =>{
+            if (checkbox.checked) {
+                childForm.classList.remove('hidden');
+                return;
+            }
+            childForm.classList.add('hidden');
+        });
+    </script>
+    <script src="{{ url_for('static', filename = 'js/child.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.maskedinput.min.js') }}"></script>
+    <script>
+    $(function(){
+      $("#phone").mask("+38(999) 999-99-99");
+    });
+    </script>
+    <script>
+        document.title = "Страхування життя";
+        n = new Date();
+        y = n. getFullYear();
+        m = n. getMonth() + 1;
+        d = n. getDate();
+        next_year = y+1;
+        if(d<10){
+            d='0'+d;
+        }
+        if(m<10){
+            m='0'+m;
+        }
+        today = y+'-'+m+'-'+d;
+        min_birth_date  = y-18+'-'+m+'-'+d;
+        next_year_date = next_year+'-'+m+'-'+d;
+
+        document. getElementById("example-start-date-input").setAttribute("value", today);
+        document. getElementById("example-end-date-input").setAttribute("value", next_year_date);
+
+        document. getElementById("example-e-input").setAttribute("max", min_birth_date);
+        document. getElementById("example-e-input").setAttribute("value", min_birth_date);
+</script>
+{% endblock %}
