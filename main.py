@@ -60,7 +60,11 @@ def insurance_form(price):
                                fullname=g.fullname,
                                email=g.email,
                                bankcard=g.bankcard)
-    
+
+@server.route('/users/me',methods=['GET'])
+def my_cabinet():
+    return render_template('users/profile_page.html')
+
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
