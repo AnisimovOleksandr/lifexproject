@@ -41,7 +41,7 @@ def cases():
 
 @server.route('/insurance/<price>', methods=['GET', 'POST'])
 def insurance_form(price):
-    return render_template('insurance/insurance_form.html', price=price)
+    return render_template('insurance/insurance_form.html', price=price, nickname=session['nickname'])
 
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
