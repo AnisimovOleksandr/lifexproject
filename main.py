@@ -118,7 +118,7 @@ def my_cabinet():
 
     if contracts != []:
         for real_tup in contracts:
-            g.insurance.append(' Страхування ' + str(real_tup[3]) + ' дійсне до ' + str(real_tup[5]))
+            g.insurance.append(' Тариф ' + str(real_tup[2]) + ' дійсний до ' + str(real_tup[5]))
     else:
         g.insurance = ['Договір не укладено']
 
