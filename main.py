@@ -58,7 +58,7 @@ def insurance_form(price):
 
             (customer_id, full_name, age, email, login, passw, bank, role) = result[0][1:-1].split(',')
             connection.close()
-            
+
             return render_template('insurance/insurance_form.html',
                                    price=price,
                                    fullname=full_name,
@@ -119,7 +119,7 @@ def my_cabinet():
 
     if contracts != []:
         for real_tup in contracts:
-            g.insurance = 'Тариф ' + str(real_tup[2]) + ' дійсний до ' + str(real_tup[5])
+            g.insurance.append('Тариф ' + str(real_tup[2]) + ' дійсний до ' + str(real_tup[5]))
     else:
         g.insurance = 'Договір не укладено'
 
