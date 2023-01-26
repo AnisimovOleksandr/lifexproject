@@ -16,22 +16,13 @@ server.config.from_object(Config)
 def before_request():
     g.user_id = None
     g.nickname = None
-    g.fullname = None
-    g.email = None
-    g.bankcard = None
     g.user_role = None
 
     if ('user_id' in session)\
             and ('nickname' in session)\
-            and ('fullname' in session)\
-            and ('email' in session)\
-            and ('bankcard' in session)\
             and ('role' in session):
         g.user_id = session['user_id']
         g.nickname = session['nickname']
-        g.fullname = session['fullname']
-        g.email = session['email']
-        g.bankcard = session['bankcard']
         g.user_role = session['role']
 
 @server.route('/')
@@ -56,13 +47,24 @@ def insurance_form(price):
         return redirect(url_for('login'))
     else:
         if request.method == 'GET':
+            connection = psycopg2.connect(
+                server.config['SQLALCHEMY_DATABASE_URI']
+            )
+            connection.autocommit = True
+
+            cursor = connection.cursor()
+            cursor.execute(f"SELECT get_customer_info({g.user_id})")
+            result = cursor.fetchall()[0]
+
+            (customer_id, full_name, age, email, login, passw, bank, role) = result[0][1:-1].split(',')
+            connection.close()
+            
             return render_template('insurance/insurance_form.html',
                                    price=price,
-                                   fullname=g.fullname,
-                                   email=g.email,
-                                   bankcard=g.bankcard)
+                                   fullname=full_name,
+                                   email=email,
+                                   bankcard=bank)
         else:
-
             connection = psycopg2.connect(
                 server.config['SQLALCHEMY_DATABASE_URI']
             )
@@ -105,7 +107,6 @@ def my_cabinet():
     cursor.execute(f"SELECT get_customer_info({g.user_id})")
     result = cursor.fetchall()[0]
 
-
     (customer_id, full_name, age, email, login, passw, bank, role) = result[0][1:-1].split(',')
 
     cursor = connection.cursor()
@@ -118,9 +119,9 @@ def my_cabinet():
 
     if contracts != []:
         for real_tup in contracts:
-            g.insurance.append(' Тариф ' + str(real_tup[2]) + ' дійсний до ' + str(real_tup[5]))
+            g.insurance = 'Тариф ' + str(real_tup[2]) + ' дійсний до ' + str(real_tup[5])
     else:
-        g.insurance = ['Договір не укладено']
+        g.insurance = 'Договір не укладено'
 
     return render_template('users/profile_page.html',
                            full_name=full_name,
@@ -229,10 +230,6 @@ def login():
     if request.method == 'POST':
         session.pop('user_id', None)
         session.pop('nickname', None)
-        session.pop('fullname', None)
-        session.pop('email', None)
-        session.pop('bankcard', None)
-        session.pop('role', None)
 
         connection = psycopg2.connect(
             server.config['SQLALCHEMY_DATABASE_URI']
@@ -256,9 +253,6 @@ def login():
             result = cursor.fetchall()[0]
             (customer_id, full_name, age, email, login, passw, bank, role) = result[0][1:-1].split(',')
 
-            session['fullname'] = full_name
-            session['email'] = email
-            session['bankcard'] = bank
             session['role'] = role
 
             connection.close()
@@ -272,16 +266,8 @@ def login():
 def logout():
     session.pop('user_id', None)
     session.pop('nickname', None)
-    session.pop('fullname', None)
-    session.pop('email', None)
-    session.pop('bankcard', None)
-    session.pop('role', None)
     g.user_id = None
     g.nickname = None
-    g.fullname = None
-    g.email = None
-    g.bankcard = None
-    g.user_role = None
 
     return render_template('homepage.html')
 
