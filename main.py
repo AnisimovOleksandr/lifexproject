@@ -16,11 +16,22 @@ server.config.from_object(Config)
 def before_request():
     g.user_id = None
     g.nickname = None
+    g.fullname = None
+    g.email = None
+    g.bankcard = None
     g.user_role = None
 
-    if ('user_id' in session) and ('nickname' in session) and ('role' in session):
+    if ('user_id' in session)\
+            and ('nickname' in session)\
+            and ('fullname' in session)\
+            and ('email' in session)\
+            and ('bankcard' in session)\
+            and ('role' in session):
         g.user_id = session['user_id']
         g.nickname = session['nickname']
+        g.fullname = session['fullname']
+        g.email = session['email']
+        g.bankcard = session['bankcard']
         g.user_role = session['role']
 
 @server.route('/')
@@ -41,7 +52,11 @@ def cases():
 
 @server.route('/insurance/<price>', methods=['GET', 'POST'])
 def insurance_form(price):
-    return render_template('insurance/insurance_form.html', price=price, nickname=session['nickname'])
+    return render_template('insurance/insurance_form.html',
+                           price=price,
+                           fullname=session['fullname'],
+                           email=session['email'],
+                           bankcard=session['bankcard'])
 
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
@@ -98,6 +113,10 @@ def login():
     if request.method == 'POST':
         session.pop('user_id', None)
         session.pop('nickname', None)
+        session.pop('fullname', None)
+        session.pop('email', None)
+        session.pop('bankcard', None)
+        session.pop('role', None)
 
         connection = psycopg2.connect(
             server.config['SQLALCHEMY_DATABASE_URI']
@@ -121,6 +140,9 @@ def login():
             result = cursor.fetchall()[0]
             (customer_id, full_name, age, email, login, passw, bank, role) = result[0][1:-1].split(',')
 
+            session['fullname'] = full_name
+            session['email'] = email
+            session['bankcard'] = bank
             session['role'] = role
 
             connection.close()
@@ -134,8 +156,16 @@ def login():
 def logout():
     session.pop('user_id', None)
     session.pop('nickname', None)
+    session.pop('fullname', None)
+    session.pop('email', None)
+    session.pop('bankcard', None)
+    session.pop('role', None)
     g.user_id = None
     g.nickname = None
+    g.fullname = None
+    g.email = None
+    g.bankcard = None
+    g.user_role = None
 
     return render_template('homepage.html')
 
