@@ -96,7 +96,38 @@ def insurance_form(price):
 
 @server.route('/users/me',methods=['GET'])
 def my_cabinet():
-    return render_template('users/profile_page.html')
+    connection = psycopg2.connect(
+        server.config['SQLALCHEMY_DATABASE_URI']
+    )
+    connection.autocommit = True
+
+    cursor = connection.cursor()
+    cursor.execute(f"SELECT get_customer_info({g.user_id})")
+    result = cursor.fetchall()[0]
+
+
+    (customer_id, full_name, age, email, login, passw, bank, role) = result[0][1:-1].split(',')
+
+    cursor = connection.cursor()
+    cursor.execute(f"select * from contracts where contracts.fk_customer_id = {customer_id}")
+    contracts = cursor.fetchall()
+
+    connection.close()
+
+    g.insurance = []
+
+    if contracts != []:
+        for real_tup in contracts:
+            g.insurance.append(' Страхування ' + str(real_tup[3]) + ' дійсне до ' + str(real_tup[5]))
+    else:
+        g.insurance = ['Договір не укладено']
+
+    return render_template('users/profile_page.html',
+                           full_name=full_name,
+                           age=age,
+                           email=email,
+                           bankcard=bank,
+                           insurance=g.insurance)
 
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
