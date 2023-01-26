@@ -1,0 +1,24 @@
+{%extends 'jinja_forms.html'%}
+{% block content %}
+<style type="text/css">
+          footer{position:absolute; bottom:0; width:100%;}
+</style>
+
+    <div class="container">
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 800px;">
+                <div class="form-group input-group input-group-lg">
+                        <div class="input-group-prepend form-check">
+                              <h2 style="text-align: center" class="form-check-label">
+                                Дякуємо, що звернулись до нас! Ваш контракт було збережено. Менеджер зв'яжеться з вами через декілька хвилин.
+                              </h2>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </div>
+
+<script>
+        document.title = "Дякуємо";
+</script>
+{% endblock %}
