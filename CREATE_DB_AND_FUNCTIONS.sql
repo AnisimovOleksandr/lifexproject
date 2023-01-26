@@ -115,7 +115,7 @@ begin
 	END IF;
 
 	UPDATE customers
-	SET (customer_login,customer_name,customer_name,customer_email,bank_card) = (customer_login_v,customer_name_v,customer_age_v,customer_email_v,bank_card_v)
+	SET (customer_login,customer_name,customer_age,customer_email,bank_card) = (customer_login_v,customer_name_v,customer_age_v,customer_email_v,bank_card_v)
 	WHERE customers.customer_id = c_id;
 
 	status := 'Successfully updated';
