@@ -1,0 +1,70 @@
+{%extends 'jinja_forms.html'%}
+{% block content %}
+        <div class="container">
+            <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 600px;">
+                <h4 class="card-title mt-3 text-center">Створити акаунт</h4>
+                <form action="{{url_for('update')}}" method="post" class="needs-validation" novalidate>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                     </div>
+                    <input name="name" class="form-control" pattern="[a-zA-Z][a-zA-Z- ]+[a-zA-Z]"
+                           placeholder="Ім'я" type="text"  required>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть ваше повне ім'я!
+                    </div>
+                </div>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+                     </div>
+                    <input name ='date' class="form-control" type="date" value="2000-01-01" id ='birth'
+                           min="1875-01-01" max="2020-01-01" required>
+                </div>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                     </div>
+                    <input name="email" class="form-control" placeholder="Email" type="email" required>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть новий адрес електронної пошти!
+                    </div>
+                </div>
+                <div class="form-group input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-credit-card"></i> </span>
+                    </div>
+                    <input name="card" type="text" class="form-control"  placeholder="Номер банківської карти"
+                           id="cardNumber" required>
+                    <div class="invalid-feedback">
+                      Будь ласка, введіть новий номер банківської карти!
+                    </div>
+                </div>
+                <div class="form-group " id="submit_button">
+                    <button type="submit" class="btn btn-primary btn-block"> Змінити дані про себе </button>
+                </div>
+                </form>
+            </article>
+            </div>
+        </div>
+    <script>
+        document.title = "Зміна";
+        n = new Date();
+        y = n. getFullYear();
+        m = n. getMonth() + 1;
+        d = n. getDate();
+
+        if(d<10){
+            d='0'+d
+        }
+
+        if(m<10){
+            m='0'+m
+        }
+
+        max_birth_date = today = y-18+'-'+m+'-'+d;
+            document.getElementById("birth").setAttribute("max", max_birth_date);
+            document.getElementById('birth').setAttribute("value", max_birth_date);
+    </script>
+{% endblock %}

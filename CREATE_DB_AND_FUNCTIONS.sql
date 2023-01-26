@@ -95,6 +95,39 @@ $body$
   where customers.customer_id = c_id;
 $body$;
 
+create or replace function update_customer(
+	c_id customers.customer_id%type,
+	customer_login_v customers.customer_login%type,
+    customer_name_v customers.customer_name%type,
+    customer_age_v customers.customer_age%type,
+    customer_email_v customers.customer_email%type,
+	bank_card_v customers.bank_card%type
+) returns text
+language plpgsql
+as
+$body$
+declare
+   status text;
+begin
+
+	IF customer_name_v LIKE '' then
+	customer_name_v := NULL;
+	END IF;
+
+	UPDATE customers
+	SET (customer_login,customer_name,customer_name,customer_email,bank_card) = (customer_login_v,customer_name_v,customer_age_v,customer_email_v,bank_card_v)
+	WHERE customers.customer_id = c_id;
+
+	status := 'Successfully updated';
+
+	return status;
+	exception
+	   when others then
+	      status := 'Error!';
+		  return status;
+end;
+$body$
+
 create or replace function create_contract(
 	fk_customer_id_v contracts.fk_customer_id%TYPE,
 	contract_type_v contracts.contract_type%TYPE,

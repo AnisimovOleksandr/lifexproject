@@ -129,6 +129,10 @@ def my_cabinet():
                            bankcard=bank,
                            insurance=g.insurance)
 
+@server.route('/users/me/update', methods=['GET', 'POST'])
+def update():
+    return render_template('users/edit_profile_page.html')
+
 @server.route('/users/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
