@@ -157,7 +157,7 @@ def update_role():
                         """)
 
     connection.close()
-    return redirect(url_for('admin_page'))
+    return redirect(url_for('admin'))
 
 @server.route('/users/me',methods=['GET'])
 def my_cabinet():
@@ -296,7 +296,7 @@ def register():
             flash('passwords are not match')
             return render_template('users/registration.html')
     else:
-        redirect(url_for('homepage'))
+        redirect(url_for('login'))
 
 @server.route('/users/login', methods=['GET', 'POST'])
 def login():
@@ -331,7 +331,11 @@ def login():
             session['role'] = role
 
             connection.close()
-            return redirect(url_for("homepage"))
+
+            if role == 'user':
+                return redirect(url_for("cases"))
+            else:
+                return redirect(url_for("homepage"))
         else:
             connection.close()
             flash('There is no user with that login')

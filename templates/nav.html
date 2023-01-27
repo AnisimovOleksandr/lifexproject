@@ -6,7 +6,7 @@
     {% if  g.nickname is not none%}
       <a class="py-2 d-none d-md-inline-block text-light" href="{{url_for('my_cabinet')}}"><i class="fa fa-user fa-lg" aria-hidden="true"></i> Особистий кабінет ({{g.nickname}})</a>
       <a class="py-2 d-none d-md-inline-block text-light" href="{{url_for('logout')}}">Вийти</a>
-      {% if g.user_role == 'admin' %}
+      {% if g.user_role == 'admin' or g.user_role == 'manager' %}
         <a class="py-2 d-none d-md-inline-block text-light" href="{{url_for('admin')}}">Керування</a>
       {% endif %}
     {% else %}
