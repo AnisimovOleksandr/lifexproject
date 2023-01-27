@@ -97,7 +97,25 @@ def insurance_form(price):
 
 @server.route('/users/admin', methods=['GET', 'POST'])
 def admin():
-    if g.user_role == 'admin':
+    if g.user_role == 'admin' or g.user_role == 'manager':
+        if request.method == 'POST':
+            connection = psycopg2.connect(
+                server.config['SQLALCHEMY_DATABASE_URI']
+            )
+            connection.autocommit = True
+
+            user_login = request.form['login']
+            session['login'] = user_login
+
+            cursor = connection.cursor()
+            cursor.execute(f"""	
+                SELECT CUSTOMERS.CUSTOMER_LOGIN, CUSTOMERS.CUSTOMER_NAME, CUSTOMERS.CUSTOMER_EMAIL, CUSTOMERS.BANK_CARD, CUSTOMERS.CUSTOMER_ROLE
+            	FROM CUSTOMERS
+            	WHERE customers.customer_login = '{user_login}';""")
+
+            g.user_tuple = cursor.fetchall()[0]
+            connection.close()
+
         return render_template('users/admin_page.html')
     else:
         return redirect(url_for('homepage'))

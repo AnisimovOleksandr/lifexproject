@@ -19,7 +19,7 @@
             <!-- Search form -->
             <form action = "{{url_for('admin')}}" method="post" class="form-inline d-flex md-form form-lg mt-0">
               <i class="fa fa-search" aria-hidden="true"></i>
-                <input class="form-control w-50" name = "log" type="text" placeholder="Find user by login" aria-label="Search">
+                <input class="form-control w-50" name="login" type="text" placeholder="Find user by login" aria-label="Search">
                 <input type="submit" class="btn btn-info" value = "Information about customer's insurances">
             </form>
             <br>
@@ -39,17 +39,19 @@
                     </tr>
                   </thead>
                   <tbody>
+                  {% for login, name, email, card, role in g.user_tuple %}
                     <tr>
                         <th scope="row"></th>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{login}}</td>
+                        <td>{{name}}</td>
+                        <td>{{email}}</td>
+                        <td>{{card}}</td>
+                        <td>{{role}}</td>
                         <td></td>
                         <td></td>
                     </tr>
+                  {% endfor %}
                   </tbody>
             </table>
 
