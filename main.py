@@ -172,14 +172,11 @@ def my_cabinet():
 
     (customer_id, full_name, age, email, login, passw, bank, role) = result[0][1:-1].split(',')
 
-    cursor = connection.cursor()
     cursor.execute(f"select * from contracts where contracts.fk_customer_id = {customer_id}")
     contracts = cursor.fetchall()
-
     connection.close()
 
     g.insurance = []
-
     if contracts != []:
         for real_tup in contracts:
             g.insurance.append('Тариф ' + str(real_tup[2]) + ' дійсний до ' + str(real_tup[5]))
@@ -229,7 +226,6 @@ def update():
                         (u_id, log_u, f_name, age_u, email_u, bankcard))
         status = cursor.fetchone()[0]
 
-        cursor = connection.cursor()
         cursor.execute(f"select * from contracts where contracts.fk_customer_id = {u_id}")
         contracts = cursor.fetchall()
 
@@ -267,7 +263,7 @@ def register():
         email = request.form['email']
 
         birth = request.form['date']
-        print(birth)
+
         year = int(birth[:4])
         month = int(birth[5:7])
         day = int(birth[8:])
@@ -290,7 +286,7 @@ def register():
             if 'error' in status.lower():
                 return render_template('users/registration.html')
             else:
-                redirect(url_for('login'))
+                return render_template('users/sign_in.html')
         else:
             connection.close()
             flash('passwords are not match')
