@@ -44,7 +44,7 @@ def cases():
 @server.route('/insurance/<price>', methods=['GET', 'POST'])
 def insurance_form(price):
     if g.user_id == None:
-        return redirect(url_for('login'))
+        return redirect(url_for('register'))
     else:
         if request.method == 'GET':
             connection = psycopg2.connect(
