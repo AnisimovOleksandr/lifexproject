@@ -119,7 +119,8 @@ def admin():
             	FROM CUSTOMERS
             	WHERE customers.customer_login = '{user_login}';""")
 
-            (user_name, user_email, user_card, user_role) = cursor.fetchall()[0]
+            if cursor.fetchall() != []:
+                (user_name, user_email, user_card, user_role) = cursor.fetchall()[0]
             connection.close()
 
         return render_template('users/admin_page.html',
