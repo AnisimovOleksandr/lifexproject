@@ -141,6 +141,24 @@ def admin():
     else:
         return redirect(url_for('homepage'))
 
+@server.route('/users/update_role', methods=['POST'])
+def update_role():
+    connection = psycopg2.connect(
+        server.config['SQLALCHEMY_DATABASE_URI']
+    )
+    connection.autocommit = True
+
+    new_role = 'manager'
+
+    cursor = connection.cursor()
+    cursor.execute(f"""
+                        UPDATE CUSTOMERS SET customer_role = '{new_role}'
+                        WHERE customer_login = '{session['login']}'
+                        """)
+
+    connection.close()
+    return redirect(url_for('admin_page'))
+
 @server.route('/users/me',methods=['GET'])
 def my_cabinet():
     connection = psycopg2.connect(
