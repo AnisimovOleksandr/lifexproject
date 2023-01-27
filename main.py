@@ -103,6 +103,7 @@ def admin():
         user_email = ''
         user_card = ''
         user_role = ''
+        contracts_tuple = []
 
         if request.method == 'POST':
             connection = psycopg2.connect(
@@ -122,13 +123,21 @@ def admin():
             user_tuple = cursor.fetchone()
             if user_tuple != None:
                 (user_name, user_email, user_card, user_role) = user_tuple
+
+            cursor.execute(f"""	
+                SELECT CONTRACTS.CONTRACT_TYPE, CONTRACTS.CONTRACT_PRICE, CONTRACTS.START, CONTRACTS.CONTRACT_END_DATE
+            	FROM CUSTOMERS JOIN CONTRACTS ON customers.customer_id = contracts.fk_customer_id
+            	WHERE customers.customer_login = '{user_login}';""")
+            contracts_tuple = cursor.fetchall()
+
             connection.close()
 
         return render_template('users/admin_page.html',
                                full_name=user_name,
                                email=user_email,
                                bankcard=user_card,
-                               role=user_role)
+                               role=user_role,
+                               contracts=contracts_tuple)
     else:
         return redirect(url_for('homepage'))
 

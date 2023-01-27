@@ -54,7 +54,7 @@
                 </div>
               </div>
             </div>
-
+            {% if contracts != [] %}
             <table class="table">
                   <thead class="thead-dark">
                     <tr>
@@ -66,16 +66,18 @@
                     </tr>
                   </thead>
                   <tbody>
+                  {% for type, price, start_date, end_date in contracts %}
                     <tr>
                         <th scope="row"></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{type}}</td>
+                        <td>{{price}}</td>
+                        <td>{{start_date}}</td>
+                        <td>{{end_date}}</td>
                     </tr>
+                  {% endfor %}
                   </tbody>
             </table>
-
+            {% endif %}
         </div>
     </div>
 {% endblock %}
