@@ -39,19 +39,17 @@
                     </tr>
                   </thead>
                   <tbody>
-                  {% for name, email, card, role in g.user_tuple %}
                     <tr>
                         <th scope="row"></th>
                         <td></td>
                         <td></td>
-                        <td>{{name}}</td>
-                        <td>{{email}}</td>
-                        <td>{{card}}</td>
-                        <td>{{role}}</td>
+                        <td>{{g.user_tuple}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>
-                  {% endfor %}
                   </tbody>
             </table>
 
