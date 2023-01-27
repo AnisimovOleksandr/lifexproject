@@ -125,7 +125,7 @@ def admin():
                 (user_name, user_email, user_card, user_role) = user_tuple
 
             cursor.execute(f"""	
-                SELECT CONTRACTS.CONTRACT_TYPE, CONTRACTS.CONTRACT_PRICE, CONTRACTS.START, CONTRACTS.CONTRACT_END_DATE
+                SELECT CONTRACTS.CONTRACT_TYPE, CONTRACTS.CONTRACT_PRICE, CONTRACTS.CONTRACT_START, CONTRACTS.CONTRACT_END_DATE
             	FROM CUSTOMERS JOIN CONTRACTS ON customers.customer_id = contracts.fk_customer_id
             	WHERE customers.customer_login = '{user_login}';""")
             contracts_tuple = cursor.fetchall()
