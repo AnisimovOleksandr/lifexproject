@@ -119,8 +119,8 @@ def admin():
             	FROM CUSTOMERS
             	WHERE customers.customer_login = '{user_login}';""")
 
-            user_tuple = cursor.fetchall()[0]
-            if user_tuple != []:
+            user_tuple = cursor.fetchone()
+            if user_tuple != None:
                 (user_name, user_email, user_card, user_role) = user_tuple
             connection.close()
 
