@@ -290,7 +290,7 @@ def register():
             if 'error' in status.lower():
                 return render_template('users/registration.html')
             else:
-                return render_template('homepage.html')
+                redirect(url_for('login'))
         else:
             connection.close()
             flash('passwords are not match')
