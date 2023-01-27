@@ -109,7 +109,7 @@ def admin():
 
             cursor = connection.cursor()
             cursor.execute(f"""	
-                SELECT CUSTOMERS.CUSTOMER_LOGIN, CUSTOMERS.CUSTOMER_NAME, CUSTOMERS.CUSTOMER_EMAIL, CUSTOMERS.BANK_CARD, CUSTOMERS.CUSTOMER_ROLE
+                SELECT CUSTOMERS.CUSTOMER_NAME, CUSTOMERS.CUSTOMER_EMAIL, CUSTOMERS.BANK_CARD, CUSTOMERS.CUSTOMER_ROLE
             	FROM CUSTOMERS
             	WHERE customers.customer_login = '{user_login}';""")
 
