@@ -95,6 +95,12 @@ def insurance_form(price):
 
             return render_template('payment.html')
 
+@server.route('/users/admin', methods=['GET', 'POST'])
+def admin():
+    if g.user_role == 'admin':
+        return render_template('users/admin_page.html')
+    else:
+        return redirect(url_for('homepage'))
 
 @server.route('/users/me',methods=['GET'])
 def my_cabinet():

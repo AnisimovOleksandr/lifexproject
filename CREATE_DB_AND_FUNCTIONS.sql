@@ -160,3 +160,6 @@ $body$
   where contracts.fk_customer_id = c_id;
 $body$;
 
+INSERT INTO CUSTOMERS VALUES (666,'Sasha', 54, 'alexanidandr@gmail.com', 'Admin666',
+							  'b10249b3b99c35a0fca54c73c2194879343ff6ebd35fe937b20f4e528522bb8c',
+							  '1111111111111111','admin');
